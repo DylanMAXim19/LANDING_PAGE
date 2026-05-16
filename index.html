@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/Logo-Pesat.png" type="image/x-icon">
-    <title>Landing Page - Budaya Papua</title>
+    <title>Budaya PAPUA</title>
     <link rel="stylesheet" href="bootstrap-5.3.8/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
     <style>
@@ -112,15 +112,28 @@ background: #fff; width: 100%; margin: 0 !important; padding: 0 !important; font
 }
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%);
 } }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateX(-36px);
+            transition: opacity 0.85s ease-out, transform 0.85s ease-out;
+            will-change: opacity, transform;
+        }
+        .scroll-reveal.right {
+            transform: translateX(36px);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body>
 <header class="container-fluid p-0">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="https://smapluspgri.sch.id" target="_blank">
-                <img src="images/Logo-Pesat.png" alt="Logo-Pesat" width="40px" class="d-inline-block align-text-top">
-                PESAT
+            <a class="navbar-brand" href="#" target="_blank">
+                <img src="images/lambang.png" alt="Logo-Pesat" width="40px" class="d-inline-block align-text-top">
+                Budaya PAPUA
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
@@ -173,8 +186,8 @@ background: #fff; width: 100%; margin: 0 !important; padding: 0 !important; font
         </div>
         <div class="col-sm-6">
             <div class="section1-1 hero-content"> 
-                <h1 class="mb-4">Menenun Warisan, Menginspirasi Masa Depan Papua.</h1>
-                <p>Mari menelusuri jejak warisan leluhur, dari magisnya ukiran suku Asmat hingga kehangatan rumah Honai. Mahakarya budaya Papua kini hadir di hadapan Anda.</p>
+                <h1 class="mb-4">PAPUA</h1>
+                <p>Papua adalah provinsi yang terletak di pesisir utara Pulau Papua. Provinsi Papua sebelumnya bernama Irian Barat (1956 – 1973) dan Irian Jaya (1973 – 2000) yang mencakup seluruh Tanah Papua bekas Keresidenan Nugini Barat. Ibu kota Papua berada di Kota Jayapura, yang berbatasan langsung dengan negara Papua Nugini.</p>
                 <button class="btn btn-lg btn-warning mt-4">Mulai Jelajah</button>
             </div>
         </div>
@@ -437,7 +450,7 @@ background: #fff; width: 100%; margin: 0 !important; padding: 0 !important; font
         <div class="row">
             <div class="col-sm-5 mb-5">
                 <div class="mb-4">
-                    <img src="images/Logo-Pesat.png" alt="Logo pesat" width="40px" class="d-inline-block"> PESAT - SMA PLUS PGRI CIBINONG
+                    <img src="images/lambang.png" alt="SAKANA BIJOU" width="40px" class="d-inline-block"> Budaya PAPUA - SAKANA BIJOU
                 </div>
                 <p class="mb-3 text-white">Projek Landing Page Web Design ini dibuat khusus untuk mempromosikan keanekaragaman dan keindahan pesona kebudayaan dari Tanah Papua.</p>
                 <p class="mb-1 text-white">Email SiDylan: <a href="mailto:dylanmaxim19@gmail.com" class="text-warning">dylanmaxim19@gmail.com</a></p>
@@ -457,14 +470,14 @@ background: #fff; width: 100%; margin: 0 !important; padding: 0 !important; font
                 <div class="mb-3"><h5 class="text-white">Tentang Projek</h5></div>
                 <div class="mb-3 d-flex flex-column gap-2">
                     <a href="#" class="menu-footer text-warning">Student Day Web Design</a>
-                    <a href="#" class="menu-footer text-warning">SMA Plus PGRI Cibinong</a>
+                    <a href="#" class="menu-footer text-warning">Budaya PAPUA</a>
                     <a href="#" class="menu-footer text-warning">Expo Pameran Web 2026</a>
                 </div>
             </div>
         </div>
         <hr style="border-color: #ef7718; border-width: 2px; opacity: 1;">
         <div class="row justify-content-between pt-3">
-            <div class="col-sm-6 text-white">Copyright &copy; 2026 Pesat. All rights reserved.</div>
+            <div class="col-sm-6 text-white">Copyright &copy; 2026 SAKANA BIJOU. All rights reserved.</div>
             <div class="col-sm-6 text-end text-white">Powered By <span class="text-warning">Studentday Web Design</span></div>
         </div>
     </div>    
@@ -623,6 +636,27 @@ document.addEventListener('DOMContentLoaded', function(){
         slides[current].classList.add('active');
     };
     setInterval(change, 7000);
+
+    const revealTargets = document.querySelectorAll('main .pola-banner, main section, footer');
+    revealTargets.forEach((el, i) => {
+        el.classList.add('scroll-reveal');
+        el.classList.add(i % 2 === 0 ? 'left' : 'right');
+    });
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0 });
+        revealTargets.forEach(el => observer.observe(el));
+    } else {
+        revealTargets.forEach(el => el.classList.add('visible'));
+    }
 });
 </script>
 <script src="bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
