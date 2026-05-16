@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/Logo-Pesat.png" type="image/x-icon">
+    <title>Landing Page - Budaya Papua</title>
+    <link rel="stylesheet" href="bootstrap-5.3.8/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+    <style>
+         .section1-1 { margin-left: 290px; }
+         .section1-2 { margin-left: 90px; }
+         .ilustration-1 { display: block; width: 100%; max-width: 320px; height: auto; }
+         .ilustration-2, .ilustration-3, .img-fluid { display: block; width: 100%; max-width: 100%; height: auto; object-fit: cover; }
+        .ilustration-3 { height: auto; }
+        .section-bg-custom { background-color: #fbeab5; }
+        .bg-primary { background-color: #efa730 !important; }
+        
+        .btn-warning {
+            background-color: #ef7718 !important;
+            border-color: #ef7718 !important;
+            color: #ffffff !important;
+        }
+        .btn-warning:hover, .btn-warning:focus {
+            background-color: #d45f17 !important;
+            border-color: #d45f17 !important;
+        }
+        
+        footer.bg-black { background-color: #5e412f !important; color: #fbeab5; }
+        footer.bg-black .text-warning { color: #fbeab5 !important; }
+        
+        /* Tab Styles */
+        .nav-tabs {
+            --bs-nav-tabs-border-color: #fff;
+            --bs-nav-tabs-link-active-border-color: #fff #fff #000;
+        }
+        .link-tab-title { font-size: 1.5rem; font-weight: 700; letter-spacing: .02em; line-height: 1.688rem; margin-bottom: 0.4rem; }
+        .link-tab-desc { font-size: 1rem; letter-spacing: .005em; line-height: 1.5rem; margin-bottom: 0.8rem; }
+        .icon-quote { font-size: 6em; color: #ef7718; margin-left: -16px; }
+        .quote { margin-top: -20px; margin-right: 100px; color: #5e412f; font-size: 1.75rem; letter-spacing: .02em; line-height: 2.875rem; }
+        .picture-tab-title { font-size: 1.5rem; font-weight: 700; letter-spacing: .029em; line-height: 1.688rem; color: #5e412f; }
+        .pictures-tab-desc { font-size: 1rem; letter-spacing: .005em; line-height: 1.5rem; color: #5e412f; }
+        
+        .social-icon { font-size: 30px; }
+        .social-icon:hover { color: #ef7718 !important; }
+        .menu-footer { display: block; text-decoration: none; color: #5e412f; }
+        .menu-footer:hover { color: #ef7718 !important; }
+        html { overflow-y: scroll; }
+        body { overflow-x: hidden; }
+        body.modal-open { overflow: hidden; padding-right: 0 !important; }
+        .row, .col-sm-6, .col-sm-8, .container-fluid { min-width: 0; }
+
+        /* MODAL CUSTOM STYLES (Background Blur) */
+        .modal-backdrop.show {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 1 !important;
+        }
+        .modal-custom-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            border-bottom: 4px solid #ef7718;
+            margin-bottom: 20px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .section1-1 { margin-left: auto; margin-right: auto; margin-top: 30px; max-width: 100%; padding: 0 1rem; }
+            .section1-2 { margin-left: auto; margin-right: auto; text-align: center; max-width: 100%; padding: 0 1rem; }
+            .ilustration5-1 { padding-left: 30px; padding-right: 30px; }
+            .ilustration-1 { width: 100%; max-width: 240px; margin: 0 auto; }
+            .ilustration-2 { width: 100%; max-width: 280px; margin-bottom: 20px; }
+            .ilustration-3 { width: 100%; max-width: 320px; height: auto; margin-bottom: 20px; }
+            #hero h1 { font-size: 2rem; line-height: 1.2; }
+            #hero p { font-size: 1rem; }
+            .btn-lg { width: 100%; }
+            .quote { margin-top: 0; margin-right: 0; font-size: 1.1rem; line-height: 1.5rem; }
+            .nav-tabs .nav-link { margin: 0.4rem 0; }
+            .nav-tabs .link-tab-title { font-size: 1.1rem; line-height: 1.4rem; }
+            .nav-tabs .link-tab-desc { font-size: 0.92rem; }
+            .tab-content .btn { width: 100%; margin-top: 1rem; }
+            .tab-content .col-sm-4 { margin-top: 1.5rem; }
+            .section-bg-custom .card-body { padding: 1rem; }
+            #hero { padding-top: 2rem; padding-bottom: 2rem; }
+            #footer-copyright { text-align: center; }
+            #footer-powered { text-align: center !important; }
+        }
+
+        /* HERO BACKGROUND SLIDESHOW */
+        #hero { position: relative; overflow: hidden; margin: 0 !important; padding: 1.5rem 0 !important; }
+        #hero .slide { position: absolute; inset: 0; background-size: cover; background-repeat: no-repeat; background-position: center; opacity: 0; transition: opacity 1.2s ease-in-out; }
+        #hero .slide.active { opacity: 1; z-index: 0; }
+        #hero .slide::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.38); }
+        #hero .hero-content { position: relative; z-index: 5; }
+        #hero h1, #hero p { text-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+        @keyframes bgPan { 0% { background-position: 10% 50%; } 50% { background-position: 50% 50%; } 100% { background-position: 90% 50%; } }
+        #hero .slide { animation: bgPan 20s ease-in-out infinite alternate; }
+
+         /* SCROLLING POLA BANNER */
+        .pola-banner { overflow: hidden;
+background: #fff; width: 100%; margin: 0 !important; padding: 0 !important; font-size: 0;
+}
+        .pola-banner-inner { display: inline-flex; white-space: nowrap; animation: scrollLeft 25s linear infinite;
+}
+        .pola-banner-inner img { height: 50px; width: auto; display: block; margin-right: -1;
+}
+        main > .row { margin-top: 0 !important;
+}
+        footer { margin-top: 0 !important;
+}
+        @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%);
+} }
+    </style>
+</head>
+<body>
+<header class="container-fluid p-0">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="https://smapluspgri.sch.id" target="_blank">
+                <img src="images/Logo-Pesat.png" alt="Logo-Pesat" width="40px" class="d-inline-block align-text-top">
+                PESAT
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Galeri</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Eksplorasi Budaya</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Seni Ukir Asmat</a></li>
+                            <li><a class="dropdown-item" href="#">Tarian Tradisional</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Destinasi Wisata</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link disabled">Tentang Kami</a></li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 bg-white text-dark" type="search" placeholder="Cari info budaya..." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Cari</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container-fluid" style="margin-top: 67px;">
+    <div class="pola-banner">
+        <div class="pola-banner-inner">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        </div>
+    </div>
+
+    <section id="hero" class="row text-white m-0 p-0">
+        <div class="col-sm-6 order-md-last">
+            <div class="section1-2 hero-content">
+                <img src="images/lambang.png" alt="Ganti ilustrasi bernuansa Papua" class="ilustration-1">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="section1-1 hero-content"> 
+                <h1 class="mb-4">Menenun Warisan, Menginspirasi Masa Depan Papua.</h1>
+                <p>Mari menelusuri jejak warisan leluhur, dari magisnya ukiran suku Asmat hingga kehangatan rumah Honai. Mahakarya budaya Papua kini hadir di hadapan Anda.</p>
+                <button class="btn btn-lg btn-warning mt-4">Mulai Jelajah</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="pola-banner">
+        <div class="pola-banner-inner">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+            <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        </div>
+    </div>
+
+    <section class="row py-3">
+        <div class="col text-center">
+            <strong>Dukung Kelestarian</strong>
+            <h1>Mari Belajar Bersama</h1>
+            <div class="lead mb-4">Dapatkan update terbaru mengenai festival budaya dan berita Papua.</div>
+            <div class="row justify-content-center">
+                <div class="col-sm-5">
+                    <div class="row">
+                        <div class="col-sm-9 mb-3">
+                            <input type="text" class="form-control" style="max-width: 300px;" placeholder="Masukkan email Anda...">
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <button class="btn btn-warning">Berlangganan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4>Jadilah bagian dari penjaga budaya. <small class="text-muted">Papua Bisa</small></h4>
+        </div>
+    </section> 
+
+    <section class="row section-bg-custom py-5">
+        <div class="col text-center">
+            <h1>Etalase Mahakarya Timur</h1>
+            <div class="row justify-content-center">
+                <div class="col-sm-5">
+                    <p class="lead"><small>Papua bukan hanya tentang alam yang indah, melainkan juga kekayaan budaya dan tradisi yang diturunkan dari generasi ke generasi.</small></p>
+                </div>
+            </div>
+            
+            <div class="row justify-content-center mt-4">
+                <div class="col-sm-2 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-start">
+                            <h5>Seni Ukir Asmat</h5>
+                            <small class="text-muted">Mahakarya Kayu Sakral</small>
+                            <div class="my-3"><span class="badge bg-success">Seni Rupa</span></div>
+                            <div class="text-center my-4">
+                                <button class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#modalAsmat">Lihat Penjelasan</button>
+                            </div>
+                            <hr>
+                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalAsmat">Lihat Penjelasan Lengkap</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 mb-3">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body text-start">
+                            <h5>Rumah Honai</h5>
+                            <small class="text-muted">Arsitektur Penuh Filosofi</small>
+                            <div class="my-3"><span class="badge bg-success">Bangunan</span></div>
+                            <div class="text-center my-4">
+                                <button class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#modalHonai">Lihat Penjelasan</button>
+                            </div>
+                            <hr>
+                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalHonai">Lihat Penjelasan Lengkap</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-start">
+                            <h5>Tas Noken</h5>
+                            <small class="text-muted">Warisan Dunia UNESCO</small>
+                            <div class="my-3"><span class="badge bg-danger">Kerajinan</span></div>
+                            <div class="text-center my-4">
+                                <button class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#modalNoken">Lihat Penjelasan</button>
+                            </div>
+                            <hr>
+                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalNoken">Lihat Penjelasan Lengkap</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-start">
+                            <h5>Tari Tifa</h5>
+                            <small class="text-muted">Irama Jantung Papua</small>
+                            <div class="my-3"><span class="badge bg-success">Pertunjukan</span></div>
+                            <div class="text-center my-4">
+                                <button class="btn btn-outline-warning w-100" data-bs-toggle="modal" data-bs-target="#modalTifa">Lihat Penjelasan</button>
+                            </div>
+                            <hr>
+                            <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modalTifa">Lihat Penjelasan Lengkap</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </section>
+
+    <section class="row section-bg-custom justify-content-center py-5">
+        <div class="col-sm-8">
+            <div class="card bg-primary text-light">
+                <div class="card-body">
+                    <div class="row p-4">
+                        <div class="col-sm-6 order-md-last text-center">
+                            <img src="images/ilustration/Noken-Papua.jpg" alt="Ganti ilustrasi Noken" class="ilustration-2">
+                        </div>
+                        <div class="col-sm-6">
+                            <h1 class="mb-4">Mengenal Lebih Dekat Budaya Noken</h1>
+                            <p>Noken bukan sekadar tas jinjing biasa, melainkan simbol kemandirian dan kehidupan bagi masyarakat Pegunungan Tengah Papua. Rajutan serat kayu ini diwariskan secara turun-temurun oleh para ibu kepada anak perempuannya.</p>
+                            <button class="btn btn-lg btn-warning mt-4" data-bs-toggle="modal" data-bs-target="#modalSejarahNoken">Pelajari Sejarah Noken</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row section-bg-custom justify-content-center py-5">
+        <div class="col-sm-8">
+            <div class="row align-items-center">
+                <div class="col-sm-6 text-center">
+                    <img src="images/ilustration/Tari_sajojo.jpeg" alt="Ganti ilustrasi tarian" class="ilustration-3">
+                </div>
+                <div class="col-sm-6 section5-1">
+                    <h5 class="text-muted">Kesenian Pergaulan</h5>
+                    <h1>Pesona Tari Sajojo</h1>
+                    <p>Tarian Sajojo adalah ekspresi kegembiraan dan semangat kebersamaan masyarakat Papua. Iringan musik Tifa yang menghentak membuat siapa saja yang mendengar pasti ingin ikut menari. Gerakannya yang dinamis merepresentasikan jiwa muda yang terus berkobar.</p>
+                </div>
+            </div>
+            <div class="row align-items-center my-5">
+                <div class="col-sm-6 text-center order-md-last">
+                    <img src="images/ilustration/bakar_batu.jpg" alt="Ganti ilustrasi Bakar Batu" class="ilustration-3">
+                </div>
+                <div class="col-sm-6 section5-1">
+                    <h5 class="text-muted">Tradisi Syukuran</h5>
+                    <h1>Ritual Bakar Batu</h1>
+                    <p>Tradisi Bakar Batu adalah salah satu ritual terpenting di Papua. Ini adalah prosesi memasak bersama menggunakan batu yang dibakar hingga membara, melambangkan rasa syukur, perdamaian, dan solidaritas persaudaraan.</p>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-sm-6 text-center">
+                    <img src="images/ilustration/raja_ampat.jpg" alt="Ganti ilustrasi alam Raja Ampat" class="ilustration-3">
+                </div>
+                <div class="col-sm-6 section5-1">
+                    <h5 class="text-muted">Eksotisme Alam</h5>
+                    <h1>Surga Tersembunyi Raja Ampat</h1>
+                    <p>Raja Ampat adalah mahkota keindahan alam Papua yang telah diakui oleh dunia internasional sebagai salah satu spot menyelam terbaik. Gugusan pulau karangnya yang menawan menyimpan keanekaragaman hayati laut terkaya di planet ini.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row justify-content-center py-5">
+        <div class="col-sm-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel">
+                    <div class="row align-items-center">
+                        <div class="col-sm-8">
+                            <i class="bi bi-quote icon-quote"></i>
+                            <div class="quote mb-5">
+                                "Budaya kita adalah jati diri kita. Tanpanya, kita hanyalah perahu yang terombang-ambing tanpa arah di tengah samudra yang luas."
+                            </div>
+                            <button class="btn btn-lg btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalFilosofi">Lihat Penjelasan Filosofi</button>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <img src="images/ilustration/ketua suku asmat.jpg" alt="Ganti foto tokoh/kepala suku" class="img-fluid w-75">
+                            <p class="picture-tab-title mt-3 mb-1">Tetua Adat Suku Asmat.</p>
+                            <p class="picture-tab-desc">Menjaga tradisi ukiran kayu leluhur.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel">
+                    <div class="row align-items-center">
+                        <div class="col-sm-8">
+                            <i class="bi bi-quote icon-quote"></i>
+                            <div class="quote mb-5">
+                                "Noken bukan sekadar tas, melainkan rahim kedua bagi kehidupan. Melaluinya, cinta ibu mengalir menemani setiap langkah kita."
+                            </div>
+                            <button class="btn btn-lg btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalSeniTradisi">Lihat Makna Seni & Tradisi</button>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <img src="images/ilustration/pengrajin_noken.jpg" alt="Ganti foto mama papua" class="img-fluid w-75">
+                            <p class="picture-tab-title mt-3 mb-1">Mama Pengrajin Noken.</p>
+                            <p class="picture-tab-desc">Mewariskan keterampilan merajut.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel">
+                    <div class="row align-items-center">
+                        <div class="col-sm-8">
+                            <i class="bi bi-quote icon-quote"></i>
+                            <div class="quote mb-5">
+                                "Bumi Cendrawasih adalah bukti nyata bahwa surga itu memang jatuh ke bumi, tempat harmoni alam dan manusia tercipta."
+                            </div>
+                            <button class="btn btn-lg btn-warning text-white" data-bs-toggle="modal" data-bs-target="#modalPesonaAlam">Lihat Penjelasan Alam</button>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <img src="images/ilustration/danau_sentani.jpg" alt="Ganti foto alam" class="img-fluid w-75">
+                            <p class="picture-tab-title mt-3 mb-1">Danau Sentani, Jayapura.</p>
+                            <p class="picture-tab-desc">Keindahan alam yang memukau mata.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="mt-5">
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab">
+                        <p class="link-tab-title">Filosofi Kehidupan</p>
+                        <p class="link-tab-desc">Harmoni manusia & alam.</p>
+                    </button>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab">
+                         <p class="link-tab-title">Seni & Tradisi</p>
+                        <p class="link-tab-desc">Warisan tak benda.</p>
+                    </button>
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab">
+                        <p class="link-tab-title">Pesona Alam</p>
+                        <p class="link-tab-desc">Surga di Timur Nusantara.</p>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+</main>
+
+<div class="pola-banner">
+    <div class="pola-banner-inner">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+        <img src="images/pola/polapapua.jpeg" alt="Pola Papua">
+    </div>
+</div>
+
+<footer class="container-fluid py-2 bg-black text-warning m-0 p-0">
+    <div class="row justify-content-center my-5"></div>
+    <div class="col-sm-10 mx-auto">
+        <div class="row">
+            <div class="col-sm-5 mb-5">
+                <div class="mb-4">
+                    <img src="images/Logo-Pesat.png" alt="Logo pesat" width="40px" class="d-inline-block"> PESAT - SMA PLUS PGRI CIBINONG
+                </div>
+                <p class="mb-3 text-white">Projek Landing Page Web Design ini dibuat khusus untuk mempromosikan keanekaragaman dan keindahan pesona kebudayaan dari Tanah Papua.</p>
+                <p class="mb-1 text-white">Email SiDylan: <a href="mailto:dylanmaxim19@gmail.com" class="text-warning">dylanmaxim19@gmail.com</a></p>
+                <p class="mb-1 text-white">Email SiFakhri: <a href="mailto:sya.fakhri@gmail.com" class="text-warning">sya.fakhri@gmail.com</a></p>
+                <p class="mb-3 text-white">Whatsapp SiDylan: <a href="https://wa.me/+6281219157758" target="_blank" class="text-warning">081219157758</a></p>
+                <p class="mb-3 text-white">Whatsapp SiFakhri: <a href="https://wa.me/+6287882220847" target="_blank" class="text-warning">087882220847</a></p>
+            </div>
+            <div class="col-sm-3 text-start ps-md-5">
+                <div class="mb-3"><h5 class="text-white">Destinasi & Budaya</h5></div>
+                <div class="mb-3 d-flex flex-column gap-2">
+                    <a href="#" class="menu-footer text-warning">Pesona Raja Ampat</a>
+                    <a href="#" class="menu-footer text-warning">Festival Danau Sentani</a>
+                    <a href="#" class="menu-footer text-warning">Seni Ukir Asmat</a>
+                </div>
+            </div>
+            <div class="col-sm-4 text-start">
+                <div class="mb-3"><h5 class="text-white">Tentang Projek</h5></div>
+                <div class="mb-3 d-flex flex-column gap-2">
+                    <a href="#" class="menu-footer text-warning">Student Day Web Design</a>
+                    <a href="#" class="menu-footer text-warning">SMA Plus PGRI Cibinong</a>
+                    <a href="#" class="menu-footer text-warning">Expo Pameran Web 2026</a>
+                </div>
+            </div>
+        </div>
+        <hr style="border-color: #ef7718; border-width: 2px; opacity: 1;">
+        <div class="row justify-content-between pt-3">
+            <div class="col-sm-6 text-white">Copyright &copy; 2026 Pesat. All rights reserved.</div>
+            <div class="col-sm-6 text-end text-white">Powered By <span class="text-warning">Studentday Web Design</span></div>
+        </div>
+    </div>    
+</footer>
+
+<div class="modal fade" id="modalAsmat" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Mahakarya Kayu Bernapas: Seni Ukir Asmat</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/seni-ukir-suku-asmat.jpg" alt="Ukir Asmat" class="modal-custom-img">
+        <p>Ibarat sebuah surat yang dikirim dari dunia roh, kayu bagi Suku Asmat bukanlah sekadar benda mati, melainkan "kanvas" yang bernapas. Setiap pahatan, lekukan, dan garis simetris yang mereka buat adalah perumpamaan dari kehadiran arwah nenek moyang mereka.</p>
+        <p>Para pengukir (disebut <em>Wow-ipits</em>) mengukir tanpa sketsa. Otak dan tangan mereka menyatu, mengalirkan memori leluhur ke dalam batang pohon beringin atau kayu besi. Melalui seni ukir inilah, Suku Asmat menjaga harmoni antara dunia manusia, alam semesta, dan dunia roh agar tetap seimbang.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalHonai" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Filosofi Kehangatan Rumah Honai</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/Honai.jpg" alt="Rumah Honai" class="modal-custom-img">
+        <p>Bayangkan sebuah pelukan ibu yang hangat di tengah badai kabut pegunungan yang menusuk tulang. Itulah perumpamaan yang paling tepat untuk Rumah Honai. Arsitekturnya yang melingkar tanpa sudut dan tanpa jendela bukan dibuat tanpa alasan.</p>
+        <p>Desain ini dirancang bagai "termos raksasa" untuk mengunci hawa panas dari perapian di tengah ruangan. Selain sebagai tempat berlindung fisik, Honai adalah pusat pendidikan. Di dalam lingkaran sempit yang diterangi api unggun inilah, para ayah menurunkan kisah keberanian, strategi bertahan hidup, dan filosofi adat kepada anak laki-lakinya.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalNoken" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Noken: Rajutan Penopang Kehidupan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/tas_noken.jpg" alt="Tas Noken" class="modal-custom-img">
+        <p>Jika kita melihat tas modern hanya sebagai wadah pembawa barang, masyarakat Papua menganggap Noken layaknya "rahim kedua". Tas yang dirajut dari serat kulit kayu, akar anggrek, dan dedaunan ini selalu dikaitkan di dahi para wanita Papua.</p>
+        <p>Posisi di kepala ini adalah perumpamaan bahwa perempuan memikul tanggung jawab besar untuk menopang kesejahteraan keluarga. Noken menemani siklus hidup manusia Papua: membawa hasil ladang untuk dimakan, membawa kayu bakar untuk kehangatan, hingga menjadi ayunan nyaman untuk menidurkan bayi yang baru lahir.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalTifa" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Tifa: Irama Jantung Bumi Cendrawasih</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/Tari_Tifa.jpg" alt="Tari Tifa" class="modal-custom-img">
+        <p>Jika tanah Papua memiliki detak jantung, maka tabuhan alat musik Tifa adalah wujud suaranya. Tifa bukan sekadar alat musik perkusi biasa; ia adalah medium komunikasi penembus dimensi.</p>
+        <p>Terbuat dari sebatang kayu yang dilubangi dan ditutup dengan kulit biawak, Tifa menghasilkan dentuman resonansi yang magis. Dalam setiap tarian perang, dentuman Tifa diibaratkan sebagai pemacu adrenalin para ksatria. Sedangkan dalam upacara syukuran, dentumannya adalah ketukan pintu untuk mengundang para roh leluhur agar ikut menari bersama manusia.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSejarahNoken" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Menelusuri Sejarah Noken (Warisan UNESCO)</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/Sejarah_noken.jpg" alt="Sejarah Noken" class="modal-custom-img">
+        <p>Bayangkan sebuah perpustakaan, tapi bukunya tidak terbuat dari kertas, melainkan berbentuk rajutan benang. Begitulah peran sejarah Noken di Papua. Sebelum ada sistem tulis-menulis, para wanita (Mama-mama Papua) mewariskan cerita dan status sosial lewat kerumitan pola rajutan Noken.</p>
+        <p>Sejak tahun 2012, UNESCO secara resmi mengakui Noken sebagai Warisan Budaya Takbenda. Pengakuan ini bukan sekadar karena kerumitan anyamannya, melainkan karena filosofi mendalam bahwa Noken adalah satu-satunya tas di dunia yang mengajarkan arti kemandirian, tanggung jawab, dan perdamaian—karena Noken tidak pernah boleh digunakan untuk membawa senjata tajam.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalFilosofi" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Filosofi Papua: Manusia dan Alam Tali Berkelindan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/filosofi papua.jpg" alt="Filosofi Papua" class="modal-custom-img">
+        <p>Seperti pohon beringin yang tak bisa tegak berdiri tanpa akar yang menancap dalam di tanah, begitulah hubungan masyarakat Papua dengan budayanya. Tanah bagi mereka bukan sekadar komoditas properti, melainkan <em>"Mama"</em> (Ibu) yang memberi makan.</p>
+        <p>Oleh karena itu, setiap ritual, ukiran, dan nyanyian mereka selalu berpusat pada rasa hormat kepada alam. Mereka mempraktikkan hukum adat "Sasi", yaitu larangan memanen hasil laut atau hutan dalam kurun waktu tertentu, layaknya memberi waktu bagi sang Ibu Bumi untuk beristirahat dan memulihkan diri.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalSeniTradisi" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Seni & Tradisi: Menghidupkan Masa Lalu di Masa Depan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/ilustration/seni_tradisi.jpeg" alt="Seni Tradisi" class="modal-custom-img">
+        <p>Seni bagi masyarakat Papua bukanlah sesuatu yang hanya dipajang di dalam etalase kaca museum. Seni adalah aktivitas yang hidup dan terus bergerak. Ibarat sebuah jembatan gantung yang membentang dari zaman prasejarah hingga era digital saat ini.</p>
+        <p>Ketika seorang Mama merajut Noken atau seorang pemuda memahat kayu Asmat, mereka sedang menjahit benang merah yang menghubungkan identitas diri mereka dengan kebijaksanaan nenek moyang yang tak lekang oleh waktu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalPesonaAlam" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-primary" style="font-size: 1.8rem;">Pesona Alam: Mutiara di Ujung Timur Nusantara</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 text-dark">
+        <img src="images/backgrounds/alam.jpg" alt="Pesona Alam" class="modal-custom-img">
+        <p>Melangkah ke alam Papua ibarat tak sengaja membuka pintu gerbang menuju taman surga purbakala yang tertinggal di bumi. Dari puncak salju abadi di Pegunungan Jayawijaya hingga kedalaman laut biru kristal di Raja Ampat, Papua menyimpan ekosistem yang luar biasa menakjubkan.</p>
+        <p>Keindahan ini bukan sekadar pemandangan, melainkan rumah bagi makhluk-makhluk eksotis bersayap emas seperti burung Cendrawasih. Menjaga pesona alam Papua berarti menjaga keajaiban terakhir yang dimiliki dunia kita.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    const images = [
+        'images/backgrounds/alam.jpg',
+        'images/backgrounds/alam2.jpg',
+        'images/backgrounds/bocah.jpg'
+    ];
+    const hero = document.getElementById('hero');
+    if(!hero) return;
+    images.forEach((src, i)=>{
+        const s = document.createElement('div');
+        s.className = 'slide';
+        s.style.backgroundImage = `url(${src})`;
+        if(i===0) s.classList.add('active');
+        hero.insertBefore(s, hero.firstChild);
+    });
+
+    let current = 0;
+    const slides = hero.querySelectorAll('.slide');
+    const change = ()=>{
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    };
+    setInterval(change, 7000);
+});
+</script>
+<script src="bootstrap-5.3.8/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
